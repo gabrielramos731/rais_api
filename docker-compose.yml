@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  rais-api:
+    build: .
+    container_name: rais-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=2302
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5432
+      - DB_NAME=rais
+    restart: unless-stopped
+    networks:
+      - rais-network
+
+networks:
+  rais-network:
+    driver: bridge

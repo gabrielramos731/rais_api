@@ -10,14 +10,15 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, Session
 import io
 import pandas as pd
+import os
 
 
 DB_CONFIG = {
-    'user': 'postgres',
-    'password': '2302',
-    'host': 'localhost',
-    'port': '5432',
-    'database': 'rais'
+    'user': os.getenv('DB_USER', 'postgres'),
+    'password': os.getenv('DB_PASSWORD', '2302'),
+    'host': os.getenv('DB_HOST', 'localhost'),
+    'port': os.getenv('DB_PORT', '5432'),
+    'database': os.getenv('DB_NAME', 'rais')
 }
 
 SQLALCHEMY_DATABASE_URL = (
@@ -165,7 +166,6 @@ def secao_municipio(
     municipio: Optional[str] = None,
     secao: Optional[int] = None,
     descricao_secao: Optional[str] = None,
-    limit: int = Query(10000, gt=0, le=100000)
 ):
     """Seção CNAE × Município"""
     filters = {k: v for k, v in locals().items() if k not in ['db'] and v is not None}
@@ -184,7 +184,6 @@ def divisao_municipio(
     descricao_divisao: Optional[str] = None,
     secao: Optional[int] = None,
     descricao_secao: Optional[str] = None,
-    limit: int = Query(10000, gt=0, le=100000)
 ):
     """Divisão CNAE × Município"""
     filters = {k: v for k, v in locals().items() if k not in ['db'] and v is not None}
@@ -201,7 +200,6 @@ def secao_microrregiao(
     microrregiao: Optional[str] = None,
     secao: Optional[int] = None,
     descricao_secao: Optional[str] = None,
-    limit: int = Query(10000, gt=0, le=100000)
 ):
     """Seção CNAE × Microrregião"""
     filters = {k: v for k, v in locals().items() if k not in ['db'] and v is not None}
@@ -220,7 +218,6 @@ def divisao_microrregiao(
     descricao_divisao: Optional[str] = None,
     secao: Optional[int] = None,
     descricao_secao: Optional[str] = None,
-    limit: int = Query(10000, gt=0, le=100000)
 ):
     """Divisão CNAE × Microrregião"""
     filters = {k: v for k, v in locals().items() if k not in ['db'] and v is not None}
@@ -237,7 +234,6 @@ def secao_mesorregiao(
     mesorregiao: Optional[str] = None,
     secao: Optional[int] = None,
     descricao_secao: Optional[str] = None,
-    limit: int = Query(10000, gt=0, le=100000)
 ):
     """Seção CNAE × Mesorregião"""
     filters = {k: v for k, v in locals().items() if k not in ['db'] and v is not None}
@@ -256,7 +252,6 @@ def divisao_mesorregiao(
     descricao_divisao: Optional[str] = None,
     secao: Optional[int] = None,
     descricao_secao: Optional[str] = None,
-    limit: int = Query(10000, gt=0, le=100000)
 ):
     """Divisão CNAE × Mesorregião"""
     filters = {k: v for k, v in locals().items() if k not in ['db'] and v is not None}
