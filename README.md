@@ -1,6 +1,4 @@
-# RAIS API - Versão Simples
-
-API REST minimalista para exportação de dados RAIS em formato Parquet.
+# RAIS API
 
 ## Inicialização
 
